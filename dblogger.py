@@ -21,15 +21,7 @@ def read_data():
         c.execute('SELECT * FROM sensore')
         for row in c.fetchall():
                 print(row)
-	
-read_data()
 
-while False:
-	log_values(data, temp, umid)
-	read_data()
-	if umid is not None and temp is not None:
-		log_values(data, temp, umid)	
-	else:
-		log_values(data, -999, -999)
-	sleep(2)
+log_values(data, temp, umid)	
+read_data()
 conn.close()
