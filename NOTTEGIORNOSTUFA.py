@@ -2,7 +2,7 @@ import Adafruit_DHT
 from time import sleep
 import time
 import RPi.GPIO as GPIO
-
+from time import localtime
 sensor = Adafruit_DHT.DHT22
 pinsensor = 4
 sleepTime = 3
@@ -14,10 +14,13 @@ umi, t = Adafruit_DHT.read_retry(sensor, pinsensor, 5, 1)
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pinrele, GPIO.OUT)
-GPIO.setup(pinrele2, GPIO.OUT)
+#GPIO.setup(pinrele2, GPIO.OUT)
 GPIO.setup(pinventi, GPIO.OUT)
+f1 = range(19, 24)			#
+f2 = range(0, 13)			#
+luce = not(localtime()[3] in (f1 + f2))	#
 
-luce = GPIO.input(pinrele2)
+#luce = GPIO.input(pinrele2)
 venti = GPIO.input(pinventi)
 min = 22
 max = 22.5
