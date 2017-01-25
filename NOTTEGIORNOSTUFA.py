@@ -24,9 +24,12 @@ luce = not(localtime()[3] in (f1 + f2))	#
 venti = GPIO.input(pinventi)
 min = 22
 max = 22.5
+deltavg = (1.0, 1.2)
 
-minN = 19
-maxN = 19.5
+minN = 19.5
+maxN = 19.8
+deltav = (1.2, 1.3)
+
 i = 0
 
 while i < 1:
@@ -39,9 +42,9 @@ while i < 1:
 			i = 1
 		elif t > max and t is not None:
 	                GPIO.output(pinrele, GPIO.HIGH)
-                        if t > max+1.7:
+                        if t > max + deltavg[1]:
 				GPIO.output(pinventi, GPIO.LOW)
-			elif t < max+1.6:
+			elif t < max + deltavg[0]:
 	                        GPIO.output(pinventi, GPIO.HIGH)
 			print('Temp={0:0.1f}*C Umidita={1:0.1f}%'.format(t, umi))
                         print('Temperatura diurna alta, stufa OFF, luci='+repr(luce)+', ventilatore='+repr(venti))
@@ -73,9 +76,9 @@ while i < 1:
 			i = 1
 		elif t > maxN and t is not None:
 			 GPIO.output(pinrele, GPIO.HIGH)
-                         if t > maxN+1.7:
+                         if t > maxN + deltav[1]:
                                 GPIO.output(pinventi, GPIO.LOW)
-                         elif t < maxN+1.6:
+                         elif t < maxN + deltav[0]:
 			       GPIO.output(pinventi, GPIO.HIGH)
                          print('Temp={0:0.1f}*C Umidita={1:0.1f}%'.format(t, umi))
                          print('Temperatura diurna alta, stufa OFF, luci='+repr(luce)+', ventilatore='+repr(venti))
